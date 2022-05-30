@@ -1,6 +1,7 @@
 import express, {json} from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import {handleError, ValidationError} from "./utils/errors";
 
 const app = express();
 
@@ -12,4 +13,6 @@ app.use(json());
 
 //routes
 
-app.listen(3001, '0.0.0.0',() => console.log('Server is running on port 3000'));
+app.use(handleError);
+
+app.listen(3001, '0.0.0.0', () => console.log('Server is running on port 3001'));
