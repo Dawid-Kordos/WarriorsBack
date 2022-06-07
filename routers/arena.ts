@@ -9,9 +9,7 @@ arenaRouter
 
   .get('/fight-form', async (req, res) => {
     const warriors = await WarriorRecord.getAll();
-    res.json({
-      warriors,
-    });
+    res.json(warriors);
   })
 
   .post('/fight', async (req, res) => {
