@@ -8,15 +8,15 @@ warriorRouter
 
     .get('/', async (req, res) => {
         const warriors = await WarriorRecord.getAll();
-        res.json({
-            warriors,
-        });
+        res.json(warriors);
     })
 
     .post('/', async (req, res) => {
         const {
             name, power, defence, resistance, agility,
         } = req.body;
+
+        console.log(name);
 
         if (await WarriorRecord.isNameUsed(name)) {
             throw new ValidationError(`Name '${name}' is already in use. Please choose another one.`);
@@ -39,13 +39,12 @@ warriorRouter
     })
 
     .delete('/:id', async (req, res) => {
-        const {id} = req.params;
+        const {id} = req.body;
+        console.log(req.body);
 
         const warrior = await WarriorRecord.getOne(id);
 
         await warrior.delete();
 
-        res.json({
-            message: 'Warrior has been deleted.'
-        });
+        res.end();
     });

@@ -10,10 +10,8 @@ hallOfFameRouter
       await WarriorRecord.topList(3)
     ).map((warrior, i) => ({
       place: i + 1,
-      warrior,
+      ...warrior,
     }));
 
-    res.json({
-      warriors,
-    });
+    res.json(warriors);
   });
