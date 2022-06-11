@@ -14,12 +14,10 @@ warriorRouter
     .post('/', async (req, res) => {
         const {
             name, power, defence, resistance, agility,
-        } = req.body;
-
-        console.log(name);
+        } = req.body
 
         if (await WarriorRecord.isNameUsed(name)) {
-            throw new ValidationError(`Name '${name}' is already in use. Please choose another one.`);
+            throw new ValidationError(`Name '${name}' already exists.`);
         }
 
         const warrior = new WarriorRecord({
@@ -40,11 +38,10 @@ warriorRouter
 
     .delete('/:id', async (req, res) => {
         const {id} = req.body;
-        console.log(req.body);
 
         const warrior = await WarriorRecord.getOne(id);
 
         await warrior.delete();
 
-        res.end();
+        res.json(id);
     });
