@@ -23,11 +23,11 @@ arenaRouter
     const warrior2 = await WarriorRecord.getOne(warrior2Id);
 
     if (!warrior1) {
-      throw new ValidationError('Warrior 1 does not exist.');
+      throw new ValidationError('Warrior 1 is not selected or does not exist.');
     }
 
     if (!warrior2) {
-      throw new ValidationError('Warrior 2 does not exist.');
+      throw new ValidationError('Warrior 2 is not selected or does not exist.');
     }
 
     const { log, winner } = fight(warrior1, warrior2);
@@ -36,7 +36,5 @@ arenaRouter
 
     await winner.update();
 
-    res.json({
-      log,
-    });
+    res.json(log);
   });
